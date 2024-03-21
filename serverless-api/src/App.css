@@ -1,0 +1,20 @@
+#root {
+ --primary: hs1(0 100% 80% / 1);
+ --primary-dark: hs1(0 100% 70% / 1);
+ --text: #222;
+}
+
+
+*{
+  box-sizing: border-box;
+}
+html,body {
+  color: var(--text);
+  line-height: 1.4;
+}
+
+header,main {
+  margin: 0 auto;
+  max-width: 90vw;
+  width: 54ch;
+}
