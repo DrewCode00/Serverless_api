@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from "react";
 
 import styles from'./form.module.css';
 
@@ -6,11 +6,36 @@ import styles from'./form.module.css';
 export function Form(){
     const [name, setName] = useState('');
     const [favoriteColor, setFavoriteColor] = useState('');
+    const[response, setResponse] = useState();
+
+    async function handlerSubmit(event: React.SyntheticEvent<HTMLFormElement>){
+        event.preventDefault();
+
+
+
+        if(name === '' && favoriteColor ===''){
+            return;
+        }
+
+        const res =await fetch('/.netlify/functions/submit', {
+            method: 'POST',
+            body:JSON.stringify({name, favoriteColor})
+
+        }).then((res) => res.json());
+
+        setResponse(res);
+        setName('');
+        setFavoriteColor('');
+
+    }
 
     return(
         <>
+        <pre>
+           {JSON.stringify(response,null,2)} 
+        </pre>
         
-        <form className={styles.form}>
+        <form onSubmit={handlerSubmit} className={styles.form}>
             <label htmlFor="name" className={styles.label}>
                 Name
             </label>
